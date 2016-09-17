@@ -1,0 +1,53 @@
+<div ng-init="init()">
+	<!-- ovo bi moglo samo preko authenticated ali ajd -->
+<h2 ng-if="addPageShow">Add Author</h2>
+<h2 ng-if="editPageShow">Change Author</h2>
+<h2 ng-if="viewPageShow">View Authoe</h2>
+<style>
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+</style>
+<p>{{korisnik|json}}
+
+<form name="formica"  class="form-horizontal">
+	<div class="form-group">
+		
+		<label class="col-sm-2 control-label" for="author.firstname">firstname</label>
+		<div class="col-sm-4">
+		   <input type="text" ng-model="author.firstname" id="author.firstname" ng-required="true" ng-readonly="viewPageShow" class="form-control" placeholder="firstname...."/>
+		</div>
+	</div>
+	<div class="form-group">
+			<label class="col-sm-2 control-label" for="author.lastname">lastname</label>
+			<div class="col-sm-4">
+				<input type="lastname" ng-model="author.lastname" id="author.lastname" ng-required="true" ng-readonly="viewPageShow" placeholder="lastname..." class="form-control"/>
+			</div>
+	</div>
+	<div class="form-group">
+		<table class="table table-hover">
+			<thead>
+				<th>ID</th>
+				<th>Title</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="book in author.books">
+					<td>{{book.id}}</td>
+					<td>{{book.title}}</td>
+				</tr>
+			</tbody>	
+	<div class="form-group">
+			<div class="col-sm-offset-4 col-sm-8">
+				<button ng-click="save()" ng-disabled="formica.$invalid" type="submit" class="btn btn-primary">Save</button>
+			</div>
+	</div>
+	
+</form>
+</div>

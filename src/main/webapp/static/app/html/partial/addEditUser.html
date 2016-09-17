@@ -1,0 +1,51 @@
+<div ng-init="init()">
+	<!-- ovo bi moglo samo preko authenticated ali ajd -->
+	<h2 ng-if="addPageShow">Dodaj korisnika</h2>
+	<h2 ng-if="editPageShow">Izmena korisnika</h2>
+	<style>
+.full button span {
+	background-color: limegreen;
+	border-radius: 32px;
+	color: black;
+}
+
+.partially button span {
+	background-color: orange;
+	border-radius: 32px;
+	color: black;
+}
+</style>
+	
+	<form name="formica" class="form-horizontal">
+		<div class="form-group">
+			<label for="newUser.username">username</label> <input type="text"
+				class="form-control" id="username" placeholder="Enter username"
+				ng-model="newUser.username" />
+		</div>
+		<div class="form-group">
+			<label for="email">Email address</label> <input type="text"
+				class="form-control" id="email" placeholder="Enter email"
+				ng-model="newUser.email" />
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label> <input type="password"
+				class="form-control" id="password" placeholder="password..."
+				ng-model="newUser.password" />
+		</div>
+		<div class="form-group">
+			<label for="passwordConfirm">Password Confirm</label> <input type="password"
+				class="form-control" id="passwordConfirm" placeholder="passwordConfirm..."
+				ng-model="newUser.passwordConfirm" />
+		</div>
+
+		<div class="form-group">
+			<label for="image">Image</label> <input type="file"
+				id="image" file-model="newUser.image" />
+		</div>
+		<button type="submit" class="btn btn-default" ng-click="register()">Submit</button>
+		<!-- <p>{{registeredUser|json}}</p> -->
+
+		
+
+	</form>
+</div>

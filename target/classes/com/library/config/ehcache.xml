@@ -1,0 +1,7 @@
+<ehcache>
+	<cache name="libCache"
+			maxBytesLocalHeap="50m"
+			timeToLiveSeconds="100">
+	</cache>
+
+</ehcache>

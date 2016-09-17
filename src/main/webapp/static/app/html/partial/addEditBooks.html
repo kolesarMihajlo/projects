@@ -1,0 +1,64 @@
+<div ng-init="init()">
+<h2 ng-if="addPageShow">Add book</h2>
+<h2 ng-if="editPageShow">Edit book</h2>
+<h2 ng-if="viewPageShow">View book</h2>
+<style>
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+</style>
+
+
+<form name="formica"  class="form-horizontal">
+	<div class="form-group">
+		
+		<label class="col-sm-2 control-label" for="book.title">Title</label>
+		<div class="col-sm-4">
+		   <input type="text" ng-model="book.title" ng-readonly="viewPageShow" id="book.title" ng-required="true" class="form-control" placeholder="Title"/>
+		</div>
+	</div>
+
+	<div class="form-group">
+			<label class="col-sm-2 control-label"  for="book.genres">Genres</label>
+			<div ng-if="book.genres.length!=0||book.genre==undefined" class="col-sm-4" ng-repeat="genre in book.genres">
+				<input type="text" ng-model="genre.genre" ng-readonly="viewPageShow" id="genre" ng-required="true" placeholder="genre" class="form-control"/>
+			</div>
+			<div ng-if="book.genre.length==0" class="col-sm-4">
+				<input type="text" ng-readonly="viewPageShow" id="genre" ng-required="true" placeholder="no specified genre" class="form-control"/>
+			</div>
+	</div>
+	<div class="form-group">
+			<label class="col-sm-2 control-label" for="book.comments">Comments</label>
+			<div ng-if="book.comments.length!=0||book.commets==undefined" class="col-sm-4" ng-repeat="comment in book.comments ">
+				<label class="col-sm-2 control-label">By:{{comment.user.username}}</label>
+				<textarea rows="4" cols="50" type="text" ng-model="comment.comment" ng-readonly="viewPageShow" id="comment" ng-required="true"  placeholder="comment" class="form-control"/></textarea><p></br></p>
+			</div>
+			<div ng-if="book.comments.length==0" class="col-sm-4">
+				<input type="text" ng-readonly="viewPageShow" id="genre" ng-required="true" placeholder="no specified comment" class="form-control"/>
+			</div>
+	</div>
+	<div class="form-group">
+			<label class="col-sm-2 control-label" for="book.authors">Authors</label>
+			<div ng-if="book.authors.length!=0||book.authors!=undefined" class="col-sm-4" ng-repeat="author in book.authors ">
+				<input type="text" ng-model="author.firstname+' '+author.lastname" ng-readonly="viewPageShow" id="genre" ng-required="true" placeholder="author" class="form-control"/>
+			</div>
+			<div ng-if="book.authors.length==0||book==undefined" class="col-sm-4">
+				<input type="text" ng-readonly="viewPageShow" id="genre" ng-required="true" placeholder="no specified author" class="form-control"/>
+			</div>
+	</div>
+		
+	
+
+
+		
+	
+	
+</form>
+</div>

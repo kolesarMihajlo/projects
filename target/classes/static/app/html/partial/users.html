@@ -1,0 +1,78 @@
+<h2>Users&nbsp;<span class="badge">{{totalResults}}</span></h2>
+
+<!-- <div class="row">
+	<form class="form-horizontal">
+		<input type="text" ng-Change="getAll()" ng-model="search"/>
+		<button type="submit" class="btn btn-primary btn-sm" ng-click="getAll()">Search</button>
+		<button class="btn btn-primary btn-sm" ng-click="search=null; getAll();">Reset</button>
+	</form>
+	
+</div>
+<br/>
+<div class="row">
+	Pronaci kako namestiti da se dugmad poravnaju sa kolonama tj slovima u kolonama!!!!!!!
+		<span class="col-sm-1">
+			<button type="button" class="btn btn-primary btn-sm active btn-info" ng-click="field='id'; order=!order">order by id</button>
+		</span>
+		<span class="col-sm-1">
+			<button type="button" class="btn btn-primary btn-sm active btn-info" ng-click="field='name'; order=!order">order by name</button>
+		</span>
+	</div> -->
+<table ng-init="page=0;getAll();" class="table table-hover" class="col-md-6">
+	
+	<thead  >
+		<tr >
+			<th >.</th>
+			<th >ID</th>
+			<th >Username</th>
+			<th >mail</th>
+			
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr ng-repeat="user in users | orderBy:field:order" ng-class="fade" >
+			<td><img  width="42" height="42" ng-src={{user.image}}></img></td>
+			<td>{{ user.id }}</td>
+			<td>{{ user.username }}</td>
+			<td >{{user.email}}</td>
+			<td><button  ng-click="remove(user.id)" class="btn btn-danger btn-xs ">Delete</button></td>
+		<!-- 		<button ng-click="view(user.id)" class="btn btn-primary btn-xs btn btn-info">View</button>
+				<a role="button" class="btn btn-warning btn-xs" href="/#/users/edit/{{ user.id }}">Edit</a> -->
+<!-- ng-click="setFalsesaveDisable()" -->
+			
+		</tr>
+	</tbody>
+
+</table>
+
+<!-- <div class="row">
+	<div class="col-md-12 text-left" >
+		<span ng-if="hideSpinner" class="glyphicon glyphicon-refresh  glyphicon-refresh-animate"></span>
+		<div class="alert alert-warning" role="alert" id="myAlert" ng-if="showError">
+ 			 <button ng-click="AlertChange()"  type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  			<strong>Warning!</strong> Greska
+		</div>
+		<div id="fadable" class="alert alert-warning " role="alert" id="myAlert" ng-if="showErrorTwo">
+ 			 <button ng-click="AlertChange()"  type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  			<strong>Warning!</strong> Nema podataka sa zadatim pramaterom:{{search}}
+		</div>
+		<!-- <div ng-show="showError" class="alert alert-danger" role="alert">Some alert message</div> -->
+		
+	</div>
+</div> -->
+<div class="row">
+	<div class="col md-12 text-center">
+		<button ng-click="page=page-1;getAll();" ng-disabled="page==0" class="btn btn-default">Previous</button>
+		<span ng-repeat="num in totalPagesArray">
+			<!-- <button ng-click="setPage(num)" class="btn btn-default btn-xs" >{{num+1}}</button> -->
+			<span ng-class="{'bold':page == num, 'noBold': page != num}" >
+				<a href="" ng-click="setPage(num);"><span ng-style="myStyle">{{num+1}}</span></a>
+			</span>
+		</span>
+		<!-- <span>{{page+1}}/{{totalPages}}</span> -->
+		<button  ng-click="page=page+1;getAll();" ng-disabled="page==totalPages-1||totalResults==0" class="btn btn-default">Next</button>
+	</div>
+</div>
+
+

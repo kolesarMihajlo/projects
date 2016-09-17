@@ -1,0 +1,86 @@
+<h2>Books&nbsp;<span class="badge">{{totalResults}}</span></h2>
+
+<div class="row">
+	<form class="form-horizontal">
+		<input type="text" ng-Change="getAll()" ng-model="search"/>
+		<button type="submit" class="btn btn-primary btn-sm" ng-click="getAll()">Search</button>
+		<button class="btn btn-primary btn-sm" ng-click="search=null; getAll();">Reset</button>
+	</form>
+	
+</div>
+<br/>
+<div class="row">
+	<!-- Pronaci kako namestiti da se dugmad poravnaju sa kolonama tj slovima u kolonama!!!!!!! -->
+		<span class="col-sm-1">
+			<button type="button" class="btn btn-primary btn-sm active btn-info" ng-click="field='id'; order=!order">order by id</button>
+		</span>
+		<span class="col-sm-1">
+			<button type="button" class="btn btn-primary btn-sm active btn-info" ng-click="field='name'; order=!order">order by name</button>
+		</span>
+	</div>
+<table ng-init="page=0;getAll();" class="table table-hover" class="col-md-6">
+	
+	<thead  >
+		<tr >
+			<th ><a href="" ng-click="orderParam=!orderParam; orderAscDesc(orderParam,'id')">ID</a></th>
+			<th >Title</th>
+			<th >Authors</th>
+			<th >Genres</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr ng-repeat="book in books | orderBy:field:order" ng-class="fade" >
+			<td>{{ book.id }}</td>
+			<td><a href="" ng-click="getDetails(book)">{{ book.title }}</a></td>
+			<td >
+				<span ng-repeat="author in book.authors">
+					<span><a href="/#/authors/view/{{author.id}}">{{author.firstname+" "}}{{author.lastname}}<a/></br></span>
+				</span>
+			</td>
+			<td>
+				<span ng-repeat="genre in book.genres">
+					<span>{{genre.genre}}</br></span>
+				</span>
+			<td>
+				<button  ng-click="remove(book.id)" class="btn btn-danger btn-xs ">Delete</button>
+				<button ng-click="view(book.id)" class="btn btn-primary btn-xs btn btn-info">View</button>
+				<!-- <a role="button" class="btn btn-warning btn-xs" href="/#/books/edit/{{ book.id }}">Edit</a> -->
+<!-- ng-click="setFalsesaveDisable()" -->
+			</td>
+		</tr>
+	</tbody>
+
+</table>
+
+<div class="row">
+	<div class="col-md-12 text-left" >
+		<span ng-if="hideSpinner" class="glyphicon glyphicon-refresh  glyphicon-refresh-animate"></span>
+		<div class="alert alert-warning" role="alert" id="myAlert" ng-if="showError">
+ 			 <button ng-click="AlertChange()"  type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  			<strong>Warning!</strong> Greska
+		</div>
+		<div id="fadable" class="alert alert-warning " role="alert" id="myAlert" ng-if="showErrorTwo">
+ 			 <button ng-click="AlertChange()"  type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  			<strong>Warning!</strong> Nema podataka sa zadatim pramaterom:{{search}}
+		</div>
+		<!-- <div ng-show="showError" class="alert alert-danger" role="alert">Some alert message</div> -->
+		
+	</div>
+</div>
+<div class="row">
+	<div class="col md-12 text-center">
+		<button ng-click="page=page-1;getAll();" ng-disabled="page==0" class="btn btn-default">Previous</button>
+		<span ng-repeat="num in totalPagesArray">
+			<!-- <button ng-click="setPage(num)" class="btn btn-default btn-xs" >{{num+1}}</button> -->
+			<span ng-class="{'bold':page == num, 'noBold': page != num}" >
+				<a href="" ng-click="setPage(num);"><span ng-style="myStyle">{{num+1}}</span></a>
+			</span>
+		</span>
+		<!-- <span>{{page+1}}/{{totalPages}}</span> -->
+		<button  ng-click="page=page+1;getAll();" ng-disabled="page==totalPages-1||totalResults==0" class="btn btn-default">Next</button>
+	</div>
+</div>
+
+
+<a ng-if="adminAuthenticated" class="btn btn-success" href="/#/activities/add">Add new activity</a>
